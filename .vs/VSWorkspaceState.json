@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\djangoWebsite",
+    "\\static",
+    "\\static\\VRCpubs",
+    "\\VRCpubs",
+    "\\VRCpubs\\migrations",
+    "\\VRCpubs\\templates",
+    "\\VRCpubs\\templates\\CMPN"
+  ],
+  "SelectedNode": "\\djangoWebsite\\settings.py",
+  "PreviewInSolutionExplorer": false
+}

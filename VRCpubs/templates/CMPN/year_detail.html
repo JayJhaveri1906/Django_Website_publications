@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% comment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css%22%3E"> {% endcomment %}
+    <title>CMPN_publications</title>
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 3px; /*for vertical scrollbar*/
+            height: 3px; /*for horizontal scrollbar*/
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            margin: 90px 0;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    {% comment %} heading {% endcomment %}
+    <div class="jumbotron jumbotron-fluid bg-warning text-black text-center">
+        <div class="container">
+            {% load static %}
+            <img src="{% static "\VRCpubs\vesLogo.png" %}" class="float-left" alt="My image">
+            <h1 class="display-4">Paper Publications</h1>
+            <p class="lead">
+                CMPN Department
+            </p>
+        </div>
+    </div>
+    {% comment %} filter+button UI {% endcomment %}
+    <div class="container">
+        {% comment %} Search bar {% endcomment %}
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        {% comment %} divisionButton {% endcomment %}
+        <br />
+
+        <h2 class="alert alert-danger alert-dismissible fade show">
+
+            CMPN Department has {{ req_objects| length }} paper{{ req_objects.count|pluralize }} published in {{ id }}
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+        </h2>
+
+        <a class="btn btn-danger" href="{% url 'index' %}">
+            All Articles
+        </a>
+        <br />
+        <br>
+        <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choose Category
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for category in Categories %}
+                <a class="dropdown-item" href="#{{ category | upper }}">{{ category }}</a>
+                {% endfor %}
+            </div>
+
+            <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-info float-right">Update</a>
+
+        </div>
+
+        <hr style="border-color:white">
+        {% for categs in Categories %}
+            <div id="myDIV">
+                <div>
+                    
+                    <div class="alert alert-warning">
+                        <center><h2 class="alert-heading" id="{{ categs | upper }}">{{ categs | upper }}</h2></center>
+                        <hr style="border-color:black;">
+                        {% comment %} {% with flag=0 %} {% endcomment %}
+                            {% for req_object in req_objects %}
+                                {% with var="" flag=0 %}
+                                    {% load custom_tags %}
+                                    {% upperChar req_object.category as var%}
+                                    {% if  var == categs %}
+                                        
+                                    <p class="text-justify" id='{{ req_object.category | upper }}'>
+                                        {{ req_object.title }}
+                                        <br>
+                                            Author: -<b>{{ req_object.author }}</b>
+                                            <p>Published On :<b>  {{ req_object.publishedAt|date:"D, dS M,  Y" }}</b></p>
+                                            <a href="{{ req_object.link }}" class="alert-link"><i class="material-icons">launch</i></a>
+                                        </p>       
+                                        <hr style="opacity:0.7;border-color:black;">                                     
+                                        {% comment %} {% load custom_tags %}
+                                        {% update_variable 1 as flag%}{% endcomment %}
+                                    {% endif %}
+                                {% endwith %}
+                                {% comment %} {% if flag == 2 %}
+                                    {% comment %} break {% endcomment %}
+                                    {% comment %} {{ forloop|break}}
+                                {% endif %}
+                                {% if flag == 1 %}            
+                                    {% update_variable 2 as flag%}
+                                    number:::::{{flag}}
+                                {% endif %} {% endcomment %}
+                                
+                            {% endfor %}
+                        {% comment %} {% endwith %} {% endcomment %}
+                    </div>
+                </div>
+                <hr style="border-color:white">   
+            </div>
+
+        {% endfor %}
+        
+
+
+
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myDIV *").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</body>
+</html>
