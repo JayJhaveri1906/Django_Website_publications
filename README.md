@@ -8,6 +8,8 @@ A simple website using Django backend and bootstrap frontend to display publicat
 ### Demo Video: https://tinyurl.com/y9ltof5p
 
 ## To run locally: -
+use command: `pip install -r requirements.txt` to install all the dependencies then,
+
 open djangoWebsite/settings.py
 
 In this file:
