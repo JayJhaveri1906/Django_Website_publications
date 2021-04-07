@@ -5,6 +5,8 @@ A simple website using Django backend and bootstrap frontend to display publicat
 
 ### Hosted Site: https://cmpn-publications-official.herokuapp.com/
 
+### Demo Video: https://tinyurl.com/y9ltof5p
+
 ## To run locally: -
 open djangoWebsite/settings.py
 
