@@ -1,6 +1,10 @@
 # Django_Website_publications
 A simple website using Django backend and bootstrap frontend to display publications of professors of an university.
 
+### Note: - Refer The docs folder for further info about the project (includes images and demo video)
+
+### Hosted Site: https://cmpn-publications-official.herokuapp.com/
+
 ## To run locally: -
 open djangoWebsite/settings.py
 
@@ -42,4 +46,3 @@ uncomment lines 14 and 131
 
 
 
-### Note: - Refer The docs for further info
