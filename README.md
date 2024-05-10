@@ -5,7 +5,7 @@ A simple website using Django backend and bootstrap frontend to display publicat
 
 ### Hosted Site: https://cmpn-publications-official.herokuapp.com/
 
-### Demo Video: https://tinyurl.com/y9ltof5p
+### Demo [PDF](https://github.com/JayJhaveri1906/Django_Website_publications/blob/master/docs/VGuru%20Publications.pdf)
 
 ## To run locally: -
 use command: `pip install -r requirements.txt` to install all the dependencies then,
